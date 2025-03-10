@@ -1,0 +1,430 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1e1e1e;
+}
+
+.container {
+  width: 1280px;
+  height: calc(100% - 100px);
+  display: flex;
+  margin: 100px auto 0;
+}
+
+.sidebar {
+  width: 300px;
+  background-color: #252526;
+  border-right: 1px solid #333333;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.editor-section {
+  width: 67%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chapters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #333333;
+}
+
+.chapters-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #d4d4d4;
+}
+
+.add-chapter-button {
+  padding: 8px 16px;
+  background-color: #2d2d2d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-chapter-button:hover {
+  background-color: #70bfff;
+}
+
+.chapters-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  min-height: 100px;
+  transition: background-color 0.3s ease;
+}
+
+.chapter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  background-color: #2d2d2d;
+  color: #cccccc;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.chapter-item:hover {
+  background-color: #3c3c3c;
+}
+
+.chapter-item.active {
+  background-color: #37373d;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.chapter-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 0;
+}
+
+.chapter-title-input {
+  width: 95%;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #4ec9b0;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+}
+
+.chapter-title-input:focus {
+  box-shadow: 0 0 0 2px rgba(78, 201, 176, 0.3);
+}
+
+.chapter-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 1px solid #6d6d6d;
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0.7;
+
+  color: #fff;
+}
+
+
+.icon-button:hover {
+  opacity: 1;
+  background-color: #606060;
+}
+
+.icon-button svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.edit-button:hover {
+  color: #4ec9b0;
+}
+
+.add-button:hover {
+  color: #4ec9b0;
+}
+
+.add-subchapter-button:hover {
+  color: #4ec9b0;
+}
+
+.delete-button:hover {
+  color: #f14c4c;
+}
+
+.text-editor-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #252526;
+  border-top: 1px solid #333333;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.save-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background-color: #2d2d2d;
+  color: #d4d4d4;
+  border: 1px solid #ff976a;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #2d2d2d;
+  border: 1px solid #ff976a;
+  color: #ff976a;
+}
+
+.save-button:active:not(:disabled) {
+  background-color: #2d2d2d;
+}
+
+.save-button:disabled {
+  background-color: #2d2d2d;
+  color: #6d6d6d;
+  border-color: #3c3c3c;
+  cursor: not-allowed;
+}
+
+.save-button.unsaved {
+  background-color: #2d2d2d;
+  color: #d4d4d4;
+  border-color: #3c3c3c;
+}
+
+.status-indicator {
+  color: #858585;
+  font-size: 12px;
+}
+
+.autosave-message {
+  font-style: italic;
+}
+
+.versions-container {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.data-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.version-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  background-color: #2d2d2d;
+  color: #d4d4d4;
+  border: 1px solid #3c3c3c;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.version-button:hover {
+  background-color: #3c3c3c;
+  border-color: #4ec9b0;
+}
+
+.export-button:hover {
+  border-color: #4ec9b0;
+  color: #4ec9b0;
+}
+
+.import-button:hover {
+  border-color: #569cd6;
+  color: #569cd6;
+}
+
+.version-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.full-screen-textarea {
+  width: 100%;
+  height: calc(100% - 50px);
+  padding: 20px;
+  font-size: 16px;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  border: none;
+  resize: none;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+.full-screen-textarea:focus {
+  outline: none;
+}
+
+/* Стили для нативного drag-and-drop */
+.chapter-item.dragging {
+  background-color: #3c3c3c;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+
+.chapter-item.drag-over {
+  border-top: 2px solid #4ec9b0;
+  padding-top: 8px;
+  transform: translateY(5px);
+  background-color: #2a2a2a;
+}
+
+/* Анимация для элементов при перетаскивании */
+.chapters-list > div {
+  transition: transform 0.2s ease, margin 0.2s ease, border 0.2s ease, padding 0.2s ease, background-color 0.2s ease;
+}
+
+/* Стилизация скроллбара для WebKit браузеров */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+
+/* Стили для иерархии глав */
+.chapter-item.level-0 {
+  margin-left: 0;
+  border-left: 2px solid #50bcff;
+}
+
+.chapter-item.level-1 {
+  margin-left: 20px;
+  border-left: 2px solid #4ec9b0;
+}
+
+.chapter-item.level-2 {
+  margin-left: 40px;
+  border-left: 2px solid #ffa15a;
+}
+
+.chapter-item.level-3 {
+  margin-left: 60px;
+  border-left: 2px solid #ce9178;
+}
+
+/* Стилизация кнопки добавления подглавы */
+.add-subchapter-button:hover {
+  color: #4ec9b0;
+}
+
+/* Стили для управления данными */
+.data-management {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #252526;
+  border-top: 1px solid #333333;
+  margin-top: auto;
+}
+
+.data-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #3c3c3c;
+  border-radius: 3px;
+  background-color: #2d2d2d;
+  color: #d4d4d4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.data-button:hover {
+  background-color: #3c3c3c;
+}
+
+.export-button:hover {
+  border-color: #4ec9b0;
+  color: #4ec9b0;
+}
+
+.import-button:hover {
+  border-color: #569cd6;
+  color: #569cd6;
+}
+
+.data-icon {
+  width: 16px;
+  height: 16px;
+}
