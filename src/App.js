@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { FiEdit2, FiPlus, FiChevronDown, FiTrash2, FiSave, FiDownload, FiUpload, FiClock, FiMenu, FiX } from 'react-icons/fi';
+import { isIndexedDBSupported } from './fileStorage';
 
 function App() {
   const [text, setText] = useState('');
@@ -16,6 +17,9 @@ function App() {
   const titleInputRef = useRef(null);
   const autoSaveTimerRef = useRef(null);
   const fileInputRef = useRef(null);
+  const [storageInfo] = useState(() => {
+    return isIndexedDBSupported() ? 'IndexedDB (Dexie.js)' : 'localStorage';
+  });
 
   // Инициализация списка глав
   useEffect(() => {
@@ -424,6 +428,10 @@ function App() {
     setActiveChapter(newChapterNumber);
   };
 
+  const allBooks = () => {
+    console.log('Adding new book');
+  };
+
   // Функция добавления подглавы
   const addSubchapter = (parentIndex) => {
     const parentChapter = chapters[parentIndex];
@@ -645,6 +653,10 @@ function App() {
 
   return (
     <div className="App">
+      {/* Техническая информация о хранилище */}
+      <div style={{ background: '#222', color: '#4ec9b0', padding: '6px 0', fontSize: 13, textAlign: 'center' }}>
+        Storage: {storageInfo}
+      </div>
       <div className="container">
         {/* Кнопка переключения боковой панели для мобильных устройств */}
         <button 
@@ -660,7 +672,10 @@ function App() {
           <div className="chapters-header">
             <h2>Главы</h2>
             <button className="add-chapter-button" onClick={() => addChapter()}>
-              Добавить главу
+              Add chapter
+            </button>
+            <button className="add-chapter-button" onClick={() => allBooks()}>
+              All books
             </button>
           </div>
           <div className="chapters-list">
