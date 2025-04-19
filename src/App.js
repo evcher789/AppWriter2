@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import { FiEdit2, FiPlus, FiChevronDown, FiTrash2, FiSave, FiDownload, FiUpload, FiClock } from 'react-icons/fi';
+import { FiEdit2, FiPlus, FiChevronDown, FiTrash2, FiSave, FiDownload, FiUpload, FiClock, FiMenu, FiX } from 'react-icons/fi';
 
 function App() {
   const [text, setText] = useState('');
@@ -8,9 +8,11 @@ function App() {
   const [activeChapter, setActiveChapter] = useState(1);
   const [chapters, setChapters] = useState([]);
   const [draggedItem, setDraggedItem] = useState(null);
-  const [dragOverItem, setDragOverItem] = useState(null);
   const [versions, setVersions] = useState({});
   const [editingChapter, setEditingChapter] = useState(null);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showVersions, setShowVersions] = useState(false);
   const titleInputRef = useRef(null);
   const autoSaveTimerRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -71,6 +73,26 @@ function App() {
   useEffect(() => {
     loadChapter(activeChapter);
   }, [activeChapter]);
+
+  // Определение мобильного устройства
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+      // Автоматически скрываем сайдбар на мобильных устройствах при первой загрузке
+      if (window.innerWidth <= 768) {
+        setSidebarVisible(false);
+      } else {
+        setSidebarVisible(true);
+      }
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
 
   // Функция загрузки главы
   const loadChapter = (chapterNumber) => {
@@ -262,8 +284,6 @@ function App() {
     
     if (draggedItem === index) return;
     
-    setDragOverItem(index);
-    
     // Получаем координаты элемента
     const rect = e.currentTarget.getBoundingClientRect();
     const y = e.clientY - rect.top;
@@ -330,7 +350,6 @@ function App() {
     
     // Сбрасываем состояние перетаскивания
     setDraggedItem(null);
-    setDragOverItem(null);
   };
 
   const handleDragEnd = (e) => {
@@ -342,7 +361,6 @@ function App() {
     
     // Сбрасываем состояние перетаскивания
     setDraggedItem(null);
-    setDragOverItem(null);
   };
 
   // Функция добавления новой главы
@@ -620,10 +638,25 @@ function App() {
       ));
   };
 
+  // Функция переключения видимости боковой панели
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
+
   return (
     <div className="App">
       <div className="container">
-        <div className="sidebar">
+        {/* Кнопка переключения боковой панели для мобильных устройств */}
+        <button 
+          className={`sidebar-toggle ${sidebarVisible ? 'active' : ''}`} 
+          onClick={toggleSidebar}
+          aria-label="Переключить боковую панель"
+        >
+          {sidebarVisible ? <FiX /> : <FiMenu />}
+        </button>
+        
+        {/* Боковая панель с классом, зависящим от состояния видимости */}
+        <div className={`sidebar ${sidebarVisible ? 'visible' : 'hidden'}`}>
           <div className="chapters-header">
             <h2>Главы</h2>
             <button className="add-chapter-button" onClick={() => addChapter()}>
@@ -634,6 +667,7 @@ function App() {
             {chapters.map((chapter, index) => renderChapter(chapter, index))}
           </div>
         </div>
+        
         <div className="editor-section">
           <div className="text-editor-container">
             <textarea
@@ -642,6 +676,7 @@ function App() {
               onChange={handleTextChange}
               placeholder="Введите текст главы здесь..."
             />
+            
             <div className="toolbar">
               <div className="toolbar-left">
                 <button 
@@ -655,6 +690,7 @@ function App() {
                 <div className="status-indicator">
                   {!isSaved && <span className="autosave-message"></span>}
                 </div>
+
               </div>
               <div className="toolbar-right">
                 <div className="versions-container">
