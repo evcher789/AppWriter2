@@ -1,8 +1,8 @@
 {
-  "name": "appwriter2",
+  "name": "app-writer2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://evcher789.github.io/appwriter2",
+  "homepage": "https://evcher789.github.io/AppWriter2",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
