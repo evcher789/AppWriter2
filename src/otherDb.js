@@ -1,7 +1,7 @@
 // otherDb.js — инициализация и схема IndexedDB через Dexie.js для страницы /other
 import Dexie from 'dexie';
 
-const otherDb = new Dexie('OtherTextsDB');
+const otherDb = new Dexie('OtherTextsDB2');
 otherDb.version(1).stores({
   chapters: '++id,number,title,level,parentId,children',
   chapterContents: 'chapterNumber',
