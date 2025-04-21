@@ -145,7 +145,7 @@ function OtherApp() {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `other-app-writer-data-${new Date().toISOString().slice(0, 10)}.json`;
+    link.download = `other-appWirter2-data-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(link);
     link.click();
     setTimeout(() => {

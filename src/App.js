@@ -199,7 +199,7 @@ function App() {
     // Создаем ссылку для скачивания и кликаем по ней
     const link = document.createElement('a');
     link.href = url;
-    link.download = `app-writer-data-${new Date().toISOString().slice(0, 10)}.json`;
+    link.download = `appWirter2-data-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(link);
     link.click();
     
