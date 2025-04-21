@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/appWirter2/static/css/main.9a92b59e.css",
-    "main.js": "/appWirter2/static/js/main.20df7bdc.js",
-    "static/js/453.8c94ffb8.chunk.js": "/appWirter2/static/js/453.8c94ffb8.chunk.js",
-    "index.html": "/appWirter2/index.html",
-    "main.9a92b59e.css.map": "/appWirter2/static/css/main.9a92b59e.css.map",
-    "main.20df7bdc.js.map": "/appWirter2/static/js/main.20df7bdc.js.map",
-    "453.8c94ffb8.chunk.js.map": "/appWirter2/static/js/453.8c94ffb8.chunk.js.map"
+    "main.css": "/appwriter2/static/css/main.9a92b59e.css",
+    "main.js": "/appwriter2/static/js/main.bf31a6cb.js",
+    "static/js/453.3df57403.chunk.js": "/appwriter2/static/js/453.3df57403.chunk.js",
+    "index.html": "/appwriter2/index.html",
+    "main.9a92b59e.css.map": "/appwriter2/static/css/main.9a92b59e.css.map",
+    "main.bf31a6cb.js.map": "/appwriter2/static/js/main.bf31a6cb.js.map",
+    "453.3df57403.chunk.js.map": "/appwriter2/static/js/453.3df57403.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a92b59e.css",
-    "static/js/main.20df7bdc.js"
+    "static/js/main.bf31a6cb.js"
   ]
 }
